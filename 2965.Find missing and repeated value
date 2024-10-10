@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<int> findMissingAndRepeatedValues(vector<vector<int>>& grid) {
+        int n2 = grid.size() * grid.size();
+        unordered_set<int> seen;
+        int missing;
+        for (auto& row : grid) {
+            for (auto& num : row) {
+                if (seen.count(num) != 0) missing = num;
+                seen.insert(num);
+            }
+        }
+        
+        int repeated;
+        for (int num = 1; num <= n2; num++) {
+            if (seen.count(num) == 0) repeated = num;
+        }
+        
+        return {missing, repeated};
+    }
+};
