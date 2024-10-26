@@ -1,0 +1,101 @@
+//Implementation of stack using global variables
+#include <stdio.h>
+#include <stdlib.h>
+
+#define size 20
+
+int stack[size],top_of_stack;
+
+void Push(int [],int); //to insert elements in the stack
+
+void Pop (int []);//to delete elements from the stack
+
+void display(int []); //to display the elements
+
+void Peek(int stack[]); // to peek into the stack top
+
+
+int main()
+{
+    int num=0;
+    int option=0;
+    top_of_stack=-1;
+
+    while(1)
+    {
+        printf("\n1: Push \n2: Pop \n3: Display \n4: Peek \n5: Exit\n Enter one of your choices:");
+        scanf("%d",&option);
+
+        switch(option)
+        {
+            case 1:
+                printf("Enter the item you want to insert :");
+                scanf("%d",&num);
+                Push(stack,num);
+            break;
+
+            case 2:
+                Pop(stack);
+            break;
+
+            case 3:
+                display(stack);
+            break;
+            
+            case 4:
+                Peek(stack);
+            break;
+            case 5:
+                exit(0);
+
+            default:
+                printf("\nPlease enter a correct option\n");
+            break;
+        }
+    }
+
+}
+
+void Push(int stack[],int num)
+{
+    if(top_of_stack==size-1)
+    {
+        printf("Stack overflow");
+        return;
+    }
+    top_of_stack++;
+    stack[top_of_stack]=num;
+}
+void Pop(int stack[])
+{
+    if(top_of_stack<0)
+    {
+        printf("Stack underflow");
+        return;
+    }
+    int delete_ele=stack[top_of_stack];
+    top_of_stack--;
+    printf("Deleted element is: %d",delete_ele);
+}
+void display(int stack[])
+{
+    if(top_of_stack==-1)
+    {
+        printf("Stack is Empty..");
+        return;
+    }
+    for(int i=top_of_stack;i>=0;i--)
+    {
+        printf(" %d ",stack[i]);
+    }
+    printf("\n\n");
+}
+void Peek(int stack[])
+{
+    if(top_of_stack==-1)
+    {
+        printf("Stack is Empty..");
+        return;
+    }
+    printf("%d",stack[top_of_stack]);
+}
