@@ -1,1 +1,1 @@
-# Leetcode_Daily_Practice
+# Daily_Coding_Practice
