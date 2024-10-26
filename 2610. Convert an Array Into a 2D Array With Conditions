@@ -1,0 +1,31 @@
+
+//using the concept of set and map data structure...
+
+class Solution {
+public:
+    vector<vector<int>> findMatrix(vector<int>& nums) {
+        
+        map<int,int>mpp;//map
+        int n=0;
+        for(auto x:nums)
+        {
+            mpp[x]++;
+            n=max(n,mpp[x]);//number of rows are need to be printed
+        }
+        vector<vector<int>>ans(n);//n size vector for the ans..
+        vector<set<int>>s(n);
+        for(auto x:nums)
+        {
+            for(int i=0;i<n;i++)
+            {
+                if(s[i].find(x)==s[i].end())
+                {
+                    ans[i].push_back(x);
+                    s[i].insert(x);
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+};
