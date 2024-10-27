@@ -1,0 +1,32 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char>st;
+        for(int i=0;i<s.length();i++)
+        {
+            if(s[i]=='('||s[i]=='{'||s[i]=='[')
+            {
+                st.push(s[i]);
+            }
+            else
+            {
+                if(st.empty())
+                {
+                    return false;
+                }
+                else if(checkPair(st.top(),s[i]))
+                {
+                    st.pop();
+                    continue;
+
+                }
+                return false;
+            }
+        }
+        return st.empty();
+    }
+    bool checkPair(char char1,char char2)
+    {
+        return (char1=='('&&char2==')'||char1=='{'&&char2=='}'||char1=='['&&char2==']');
+    }
+};
