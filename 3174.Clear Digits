@@ -1,0 +1,55 @@
+//using stack
+class Solution {
+public:
+    string clearDigits(string s) {
+        stack<int>st;
+        for(auto i:s)
+        {
+            if(st.empty())
+            {
+                st.push(i);
+            }
+            else if(isdigit(i)&&!isdigit(st.top()))
+            {
+                st.pop();
+            }
+            else if(!isdigit(i))
+            {
+                st.push(i);
+            }
+        }
+        string ans="";
+        while(st.size())
+        {
+            auto i=st.top();
+            st.pop();
+            ans+=i;
+        }
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }
+
+};
+
+
+////////////////////////////////////////
+class Solution {
+public:
+    string clearDigits(string s) {
+        int n=s.length();
+
+        stack<char>st;
+        string ans="";
+        for(int i=0;i<n;i++){
+            if(!st.empty() && isdigit(s[i])){
+                st.pop();
+                ans.pop_back();
+            }
+            else{
+                st.push(s[i]);
+                ans+=s[i];
+            }
+        }
+        return ans;
+    }
+};
