@@ -1,0 +1,20 @@
+//TC->O(nlogK)
+//SC->O(1)
+//when KthLargestest element is asked we need to use minheap
+//When KthSmallest element is asked we need to use maxheap
+
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        priority_queue<int,vector<int>,greater<int>>minh;
+        for(int i=0;i<nums.size();i++)
+        {
+            minh.push(nums[i]);
+            if(minh.size()>k)
+            {
+                minh.pop();
+            }
+        }
+        return minh.top();
+    }
+};
