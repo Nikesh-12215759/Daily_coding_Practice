@@ -1,0 +1,30 @@
+//https://www.geeksforgeeks.org/problems/three-great-candidates0515/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
+
+class Solution {
+  public:
+    long long maxProduct(vector<int> arr) {
+    long long maxA = LLONG_MIN, maxB = LLONG_MIN, maxC = LLONG_MIN;
+    long long minA = LLONG_MAX, minB = LLONG_MAX;
+
+    for (int i = 0; i < arr.size(); i++) {
+        if (arr[i] > maxA) {
+            maxC = maxB;
+            maxB = maxA;
+            maxA = arr[i];
+        } else if (arr[i] > maxB) {
+            maxC = maxB;
+            maxB = arr[i];
+        } else if (arr[i] > maxC) {
+            maxC = arr[i];
+        }
+
+        if (arr[i] < minA) {
+            minB = minA;
+            minA = arr[i];
+        } else if (arr[i] < minB) {
+            minB = arr[i];
+        }
+    }
+    return max(maxA * maxB * maxC, minA * minB * maxA);
+}
+};
