@@ -1,0 +1,29 @@
+class Solution {
+public:
+    void Permutation(vector<int>&nums,int left,int right,vector<vector<int>>&ans)
+    {
+        if(left==nums.size())
+        {
+            ans.push_back(nums);
+            return;
+        }
+        unordered_set<int>swapper;
+            for(int i=left;i<=right;i++)
+            {
+                if(swapper.find(nums[i])!=swapper.end())
+                {
+                    continue;
+                }
+                swapper.insert(nums[i]);
+                swap(nums[left],nums[i]);
+                Permutation(nums,left+1,right,ans);
+                swap(nums[left],nums[i]);
+            }
+    }
+    
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        vector<vector<int>>ans;
+        Permutation(nums,0,nums.size()-1,ans);
+        return ans;
+    }
+};
