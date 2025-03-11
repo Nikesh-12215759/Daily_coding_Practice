@@ -1,0 +1,22 @@
+//using hash map and sliding window
+//TC=>O(n)
+//SC=>O(n)
+class Solution {
+public:
+    int numberOfSubstrings(string s) {
+        int n=s.length();
+        unordered_map<char,int>freq;
+        int l=0,ans=0;
+        for(int r=0;r<n;r++)
+        {
+            freq[s[r]]++;
+            while(freq['a']>0 && freq['b']>0 && freq['c']>0)
+            {
+                ans+=(n-r);
+                freq[s[l]]--;
+                l++;
+            }
+        }
+        return ans;
+    }
+};
