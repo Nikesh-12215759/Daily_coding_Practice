@@ -1,0 +1,79 @@
+class Solution {
+public:
+vector<int>NSL(vector<int>& heights)
+{
+        int n=heights.size();
+        vector<int>left(n);
+        stack<pair<int,int>>st;
+        int pseudo_indx=-1; 
+
+        for(int i=0;i<n;i++)
+        {
+            if(st.empty())left[i]=pseudo_indx;
+            else if(!st.empty() && st.top().first<heights[i])
+            {
+                left[i]=st.top().second;
+            }
+            else if(!st.empty() && st.top().first>=heights[i])
+            {
+                while(!st.empty() && st.top().first>=heights[i])
+                {
+                    st.pop();
+                }
+                if(st.empty())left[i]=pseudo_indx;
+                else left[i]=st.top().second;
+            }
+            st.push({heights[i],i});
+        }
+        return left;
+}
+vector<int>NSR(vector<int>& heights)
+{
+        int n=heights.size();
+        vector<int>right(n);
+        stack<pair<int,int>>st;
+        int pseudo_indx=n; 
+
+        for(int i=n-1;i>=0;i--)
+        {
+            if(st.empty())right[i]=pseudo_indx;
+            else if(!st.empty() && st.top().first<heights[i])
+            {
+                right[i]=st.top().second;
+            }
+            else if(!st.empty() && st.top().first>=heights[i])
+            {
+                while(!st.empty() && st.top().first>=heights[i])
+                {
+                    st.pop();
+                }
+                if(st.empty())right[i]=pseudo_indx;
+                else right[i]=st.top().second;
+            }
+            st.push({heights[i],i});
+        }
+        return right;
+}
+
+    int largestRectangleArea(vector<int>& heights) {
+        vector<int>left=NSL(heights);
+        vector<int>right=NSR(heights);
+        int n=heights.size();
+        vector<int>width(n);
+        
+        for(int i=0;i<n;i++)
+        {
+            width[i]=right[i]-left[i]-1;
+        }
+        int MaxArea=0;
+        for(int i=0;i<n;i++)
+        {
+            int curr_area=width[i]*heights[i];
+            if(curr_area>MaxArea)
+            {
+                MaxArea=curr_area;
+            }
+        }
+        return MaxArea;
+    }
+};
